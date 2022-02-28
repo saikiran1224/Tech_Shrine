@@ -63,20 +63,20 @@ class _EPSignInScreenState extends State<EPSignInScreen> {
                           Flexible(
                             flex: 1,
                             child: Image.asset(
-                              'assets/firebase_logo.png',
+                              'assets/images/firebase_logo.png',
                               height: 160,
                             ),
                           ),
                           SizedBox(height: 20),
                           Text(
-                            'FlutterFire',
+                            'Tech Shrine',
                             style: TextStyle(
                               color: Palette.firebaseYellow,
                               fontSize: 40,
                             ),
                           ),
                           Text(
-                            'Authentication',
+                            'Hearty Welcome!',
                             style: TextStyle(
                               color: Palette.firebaseOrange,
                               fontSize: 40,
@@ -111,19 +111,6 @@ class _EPSignInScreenState extends State<EPSignInScreen> {
                   ],
                 ),
               ),
-              Align(
-                alignment: Alignment.topLeft,
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 8.0, left: 8.0),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.black26,
-                      borderRadius: BorderRadius.circular(30.0),
-                    ),
-                    child: BackButton(),
-                  ),
-                ),
-              )
             ],
           ),
         ),
