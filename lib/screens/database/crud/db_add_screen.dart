@@ -4,15 +4,21 @@ import 'package:flutterfire_samples/widgets/app_bar_title.dart';
 import 'package:flutterfire_samples/widgets/database/crud/db_add_item_form.dart';
 
 class DbAddScreen extends StatelessWidget {
-  final FocusNode _titleFocusNode = FocusNode();
-  final FocusNode _descriptionFocusNode = FocusNode();
+  final FocusNode _nameFocusNode = FocusNode();
+  final FocusNode _emailFocusNode = FocusNode();
+  final FocusNode _jntuFocusNode = FocusNode();
+  final FocusNode _interestsFocusNode = FocusNode();
+  final FocusNode _shortIntroFocusNode = FocusNode();
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        _titleFocusNode.unfocus();
-        _descriptionFocusNode.unfocus();
+        _nameFocusNode.unfocus();
+        _emailFocusNode.unfocus();
+        _jntuFocusNode.unfocus();
+        _interestsFocusNode.unfocus();
+        _shortIntroFocusNode.unfocus();
       },
       child: Scaffold(
         backgroundColor: Palette.firebaseNavy,
@@ -20,7 +26,7 @@ class DbAddScreen extends StatelessWidget {
           elevation: 0,
           backgroundColor: Palette.firebaseNavy,
           title: AppBarTitle(
-            sectionName: 'CRUD',
+            sectionName: 'Register Student',
           ),
         ),
         body: SafeArea(
@@ -31,8 +37,11 @@ class DbAddScreen extends StatelessWidget {
               bottom: 20.0,
             ),
             child: DbAddItemForm(
-              titleFocusNode: _titleFocusNode,
-              descriptionFocusNode: _descriptionFocusNode,
+              nameFocusNode: _nameFocusNode,
+              emailFocusNode: _emailFocusNode,
+              jntuFocusNode: _jntuFocusNode,
+              interestsFocusNode: _interestsFocusNode,
+              shortIntroFocusNode: _shortIntroFocusNode
             ),
           ),
         ),

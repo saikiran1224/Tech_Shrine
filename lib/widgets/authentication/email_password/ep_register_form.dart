@@ -5,6 +5,7 @@ import 'package:flutterfire_samples/screens/authentication/email_password/ep_sig
 import 'package:flutterfire_samples/screens/authentication/email_password/ep_user_info_screen.dart';
 import 'package:flutterfire_samples/utils/ep_authentication.dart';
 import 'package:flutterfire_samples/utils/ep_validator.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../custom_form_field.dart';
 
@@ -49,6 +50,21 @@ class _EPRegisterFormState extends State<EPRegisterForm> {
         );
       },
     );
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _loadSharedPrefs();
+  }
+
+  void _loadSharedPrefs() async {
+
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      prefs.setString("userName", _nameController.text.toString());
+    });
   }
 
   @override
@@ -134,6 +150,8 @@ class _EPRegisterFormState extends State<EPRegisterForm> {
                         widget.emailFocusNode.unfocus();
                         widget.passwordFocusNode.unfocus();
 
+
+
                         setState(() {
                           _isSingningUp = true;
                         });
@@ -146,6 +164,11 @@ class _EPRegisterFormState extends State<EPRegisterForm> {
                             password: _passwordController.text,
                             context: context,
                           );
+
+                          final prefs = await SharedPreferences.getInstance();
+                          setState(() {
+                            prefs.setString("userName", _nameController.text.toString());
+                          });
 
                           if (user != null) {
                             Navigator.of(context).pushReplacement(

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutterfire_samples/res/custom_colors.dart';
 import 'package:flutterfire_samples/widgets/app_bar_title.dart';
 import 'package:flutterfire_samples/widgets/authentication/email_password/ep_register_form.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class EPRegisterScreen extends StatefulWidget {
   @override
@@ -12,6 +13,7 @@ class _EPRegisterScreenState extends State<EPRegisterScreen> {
   final FocusNode _nameFocusNode = FocusNode();
   final FocusNode _emailFocusNode = FocusNode();
   final FocusNode _passwordFocusNode = FocusNode();
+
 
   @override
   Widget build(BuildContext context) {

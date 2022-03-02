@@ -1,8 +1,14 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterfire_samples/res/custom_colors.dart';
+import 'package:flutterfire_samples/screens/database/crud/db_add_screen.dart';
 import 'package:flutterfire_samples/utils/ep_authentication.dart';
 import 'package:flutterfire_samples/widgets/app_bar_title.dart';
+import 'package:toggle_switch/toggle_switch.dart';
+
+import 'package:page_transition/page_transition.dart';
+import 'package:swipeable_button_view/swipeable_button_view.dart';
 
 import 'ep_sign_in_screen.dart';
 
@@ -23,6 +29,8 @@ class _EPUserInfoScreenState extends State<EPUserInfoScreen> {
 
   bool _verificationEmailBeingSent = false;
   bool _isSigningOut = false;
+
+  bool _isFinished = false;
 
   Route _routeToSignInScreen() {
     return PageRouteBuilder(
@@ -53,13 +61,16 @@ class _EPUserInfoScreenState extends State<EPUserInfoScreen> {
 
   @override
   Widget build(BuildContext context) {
+
+    //var isFinished = false;
+
     return Scaffold(
       backgroundColor: Palette.firebaseNavy,
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Palette.firebaseNavy,
         title: AppBarTitle(
-          sectionName: 'Authentication',
+          sectionName: 'Welcome!',
         ),
       ),
       body: SafeArea(
@@ -158,7 +169,7 @@ class _EPUserInfoScreenState extends State<EPUserInfoScreen> {
                         ),
                       ],
                     ),
-              SizedBox(height: 8.0),
+              SizedBox(height: 40.0),
               Visibility(
                 visible: !_isEmailVerified,
                 child: Row(
@@ -220,15 +231,64 @@ class _EPUserInfoScreenState extends State<EPUserInfoScreen> {
                   ],
                 ),
               ),
-              SizedBox(height: 24.0),
-              Text(
-                'You are now signed in using Firebase Authentication. To sign out of your account click the "Sign Out" button below.',
-                style: TextStyle(
-                    color: Palette.firebaseGrey.withOpacity(0.8),
-                    fontSize: 14,
-                    letterSpacing: 0.2),
-              ),
-              SizedBox(height: 16.0),
+              SizedBox(height: 20.0),
+              Visibility(
+                  visible: _isEmailVerified,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Center(
+                        child: Text(
+                          'Congratulations! You are all set to enter the application',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              color: Palette.firebaseGrey.withOpacity(0.8),
+                              fontSize: 14,
+                              letterSpacing: 0.2),
+                        ),
+                      ),
+                      SizedBox(height: 50.0),
+                      /*ToggleSwitch(
+                initialLabelIndex: 0,
+                totalSwitches: 3,
+                minWidth: 95.0,
+                activeBgColor: [Palette.firebaseAmber],
+                labels: ["2nd Year", "3rd Year", "4th Year"],
+                onToggle: (index){
+                  print('Switched to $index');
+                },
+              ),*/
+                      SwipeableButtonView(
+                        buttonText: 'SLIDE TO REGISTER',
+                        buttonWidget: Container(
+                          child: Icon(Icons.arrow_forward_ios_rounded,
+                            color: Palette.firebaseNavy,
+                          ),),
+                        activeColor: Palette.firebaseAmber,
+                        onWaitingProcess: () {
+                          Future.delayed(Duration(seconds: 2), () {
+                            setState(() {
+                              _isFinished = true;
+                            });
+                          });
+                        },
+                        isFinished: _isFinished,
+                        onFinish: () async {
+                          await Navigator.push(context,
+                              PageTransition(
+                                  type: PageTransitionType.fade,
+                                  child: DbAddScreen()));
+
+                          //TODO: For reverse ripple effect animation
+                          setState(() {
+                            _isFinished = false;
+                          });
+                        },
+                      ),
+                    ],
+                  )),
+
+              SizedBox(height: 120.0),
               _isSigningOut
                   ? CircularProgressIndicator(
                       valueColor: AlwaysStoppedAnimation<Color>(
@@ -262,7 +322,7 @@ class _EPUserInfoScreenState extends State<EPUserInfoScreen> {
                         child: Text(
                           'Sign Out',
                           style: TextStyle(
-                            fontSize: 20,
+                            fontSize: 15,
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
                             letterSpacing: 2,

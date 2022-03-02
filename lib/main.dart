@@ -9,16 +9,18 @@ import 'package:flutterfire_samples/res/custom_colors.dart';
 import 'package:flutterfire_samples/screens/authentication/email_password/ep_sign_in_screen.dart';
 import 'package:flutterfire_samples/screens/authentication/email_password/ep_user_info_screen.dart';
 import 'package:flutterfire_samples/screens/onboarding/onboarding_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'screens/main_screens/home_screen.dart';
 import 'package:device_preview/device_preview.dart';
 
 void main() {
   runApp(
-    DevicePreview(
+    MyApp()
+    /*DevicePreview(
       enabled: !kReleaseMode,
       builder: (context) => MyApp(), // Wrap your app
-    ),
+    ),*/
   );
 }
 
@@ -29,8 +31,8 @@ class MyApp extends StatelessWidget {
       title: 'FlutterFire Samples',
       debugShowCheckedModeBanner: false,
       useInheritedMediaQuery: true,
-      locale: DevicePreview.locale(context),
-      builder: DevicePreview.appBuilder,
+      //locale: DevicePreview.locale(context),
+      //builder: DevicePreview.appBuilder,
       theme: ThemeData(
         primarySwatch: Colors.indigo,
         brightness: Brightness.dark,
@@ -62,6 +64,14 @@ class _MyHomePageState extends State<MyHomePage> {
 
       // setting the isUserSignedIn value as True since user is already signed in
       _isUserSignedIn = true;
+
+      final prefs = await SharedPreferences.getInstance();
+
+      // setting the User Data
+      await prefs.setString("userEmail", _user.email.toString());
+      await prefs.setString("userPhotoUrl", _user.photoURL.toString());
+
+
       //Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => EPUserInfoScreen(user: user)));
     }
 
@@ -95,7 +105,7 @@ class _MyHomePageState extends State<MyHomePage> {
             right: 16.0,
             bottom: 0.0,
           ),
-          child: Column(
+           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
               SizedBox(width:150.0),

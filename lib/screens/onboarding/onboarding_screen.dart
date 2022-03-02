@@ -3,13 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutterfire_samples/screens/authentication/email_password/ep_sign_in_screen.dart';
-/*
-import 'package:flutter_onboarding_ui/utilities/styles.dart';
-*/
 import 'package:flutterfire_samples/utils/styles.dart';
-
-import '../../res/custom_colors.dart';
-import '../authentication/email_password/ep_user_info_screen.dart';
 
 class OnboardingScreen extends StatefulWidget {
   @override
@@ -40,10 +34,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         borderRadius: BorderRadius.all(Radius.circular(12)),
       ),
     );
-
-
-
-    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -249,7 +240,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               ),
             )
           : Text(''),
-
     );
   }
 }
