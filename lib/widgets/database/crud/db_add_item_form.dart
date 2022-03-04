@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterfire_samples/res/custom_colors.dart';
+import 'package:flutterfire_samples/screens/main_screens/dashboard_screen.dart';
 import 'package:flutterfire_samples/utils/database.dart';
 import 'package:flutterfire_samples/utils/db_validator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -268,7 +269,7 @@ class _DbAddItemFormState extends State<DbAddItemForm>{
                                 _isProcessing = false;
                               });
 
-                              Navigator.of(context).pop();
+                              Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => DashboardScreen()));
                           }
                         },
                         child: Padding(

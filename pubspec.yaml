@@ -60,6 +60,11 @@ flutter:
     - assets/images/onboarding2.png
     - assets/images/firebase_logo.png
     - assets/images/on_boarding_0.png
+    - assets/images/image.png
+    - assets/images/calendar.png
+    - assets/images/note.png
+    - assets/images/settings.png
+    - assets/images/todo.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

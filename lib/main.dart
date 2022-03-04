@@ -1,6 +1,5 @@
 import 'dart:async';
 
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
@@ -70,7 +69,6 @@ class _MyHomePageState extends State<MyHomePage> {
       // setting the User Data
       await prefs.setString("userEmail", _user.email.toString());
       await prefs.setString("userPhotoUrl", _user.photoURL.toString());
-
 
       //Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => EPUserInfoScreen(user: user)));
     }

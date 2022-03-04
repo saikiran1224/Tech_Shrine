@@ -17,8 +17,7 @@ class DbItemList extends StatelessWidget {
             separatorBuilder: (context, index) => SizedBox(height: 16.0),
             itemCount: snapshot.data!.docs.length,
             itemBuilder: (context, index) {
-              var noteInfo =
-                  snapshot.data!.docs[index].data() as Map<String, dynamic>;
+              var noteInfo = snapshot.data!.docs[index].data() as Map<String, dynamic>;
               String docID = snapshot.data!.docs[index].id;
               String title = noteInfo['title'];
               String description = noteInfo['description'];

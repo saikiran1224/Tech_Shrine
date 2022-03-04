@@ -5,6 +5,7 @@ import 'package:flutterfire_samples/res/custom_colors.dart';
 import 'package:flutterfire_samples/screens/database/crud/db_add_screen.dart';
 import 'package:flutterfire_samples/utils/ep_authentication.dart';
 import 'package:flutterfire_samples/widgets/app_bar_title.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 
 import 'package:page_transition/page_transition.dart';
@@ -23,6 +24,7 @@ class EPUserInfoScreen extends StatefulWidget {
   _EPUserInfoScreenState createState() => _EPUserInfoScreenState();
 }
 
+
 class _EPUserInfoScreenState extends State<EPUserInfoScreen> {
   late bool _isEmailVerified;
   late User _user;
@@ -31,6 +33,8 @@ class _EPUserInfoScreenState extends State<EPUserInfoScreen> {
   bool _isSigningOut = false;
 
   bool _isFinished = false;
+
+  String userProfileUrl = "";
 
   Route _routeToSignInScreen() {
     return PageRouteBuilder(
@@ -55,8 +59,8 @@ class _EPUserInfoScreenState extends State<EPUserInfoScreen> {
   void initState() {
     _user = widget._user;
     _isEmailVerified = _user.emailVerified;
-
     super.initState();
+
   }
 
   @override
