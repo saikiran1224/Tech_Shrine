@@ -7,6 +7,7 @@ import 'package:flutterfire_samples/utils/database.dart';
 class DbItemList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+
     return StreamBuilder<QuerySnapshot>(
       stream: Database.readItems(),
       builder: (context, snapshot) {

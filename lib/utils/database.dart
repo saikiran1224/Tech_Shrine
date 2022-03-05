@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
 final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 final CollectionReference _mainCollection = _firestore.collection('students_data');
@@ -55,12 +56,27 @@ class Database {
         .catchError((e) => print(e));
   }
 
+  static Future<void> listAllFiles() async {
+    ListResult result = await FirebaseStorage.instance.ref().listAll();
+
+    result.items.forEach((Reference ref) {
+      print('Found file: $ref');
+    });
+
+    result.prefixes.forEach((Reference ref) {
+      print('Found directory: $ref');
+    });
+
+  }
+
   static Stream<QuerySnapshot> readItems() {
     CollectionReference notesItemCollection =
         _mainCollection.doc(userUid).collection('items');
 
     return notesItemCollection.snapshots();
   }
+
+
 
   static Future<void> deleteItem({
     required String docId,
