@@ -69,6 +69,8 @@ flutter:
     - assets/images/note.png
     - assets/images/settings.png
     - assets/images/todo.png
+    - assets/images/pdf_image.png
+    - assets/images/connect_image.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

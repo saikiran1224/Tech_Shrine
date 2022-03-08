@@ -19,8 +19,11 @@ class DbAddItemForm extends StatefulWidget {
   final FocusNode shortIntroFocusNode;
   final FocusNode interestsFocusNode;
 
+  final String userDisplayName;
+
   const DbAddItemForm(
-      {required this.nameFocusNode,
+      {required this.userDisplayName,
+      required this.nameFocusNode,
       required this.emailFocusNode,
       required this.jntuFocusNode,
       required this.shortIntroFocusNode,
@@ -45,7 +48,7 @@ class _DbAddItemFormState extends State<DbAddItemForm>{
   final TextEditingController _interestsController = TextEditingController();
 
   String userEmailID = "";
-  String userName = "";
+  String userDisplayName = "";
 
   @override
   void initState() {
@@ -57,17 +60,20 @@ class _DbAddItemFormState extends State<DbAddItemForm>{
   void _loadSharedPrefs() async {
 
     final prefs = await SharedPreferences.getInstance();
-    setState(() {
-       userEmailID = prefs.getString("userEmail")!;
-       userName = prefs.getString("userName")!;
-      // _emailController.text = userEmailID;
-       _nameController.text = userName;
 
+    setState(() async {
+      userEmailID = prefs.getString("userEmail")!;
+      userDisplayName = prefs.getString("userDisplayName")!;
     });
+
+   // _nameController.text = userDisplayName;
   }
 
   @override
   Widget build(BuildContext context) {
+
+    _nameController.text = widget.userDisplayName;
+
     return Form(
         key: _addItemFormKey,
         child: SingleChildScrollView(
@@ -269,7 +275,14 @@ class _DbAddItemFormState extends State<DbAddItemForm>{
                                 _isProcessing = false;
                               });
 
-                              Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => DashboardScreen()));
+                            // initialising Shared Preferences
+                            final prefs = await SharedPreferences.getInstance();
+
+                            // setting user Registered
+                            await prefs.setBool("userRegisteredStatus", true);
+
+
+                              Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => DashboardScreen(userEmailID: userEmailID, userDisplayName: _nameController.text.toString())));
                           }
                         },
                         child: Padding(

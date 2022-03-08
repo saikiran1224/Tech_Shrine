@@ -1,19 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:flutterfire_samples/res/custom_colors.dart';
 import 'package:flutterfire_samples/screens/main_screens/circulars_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 
 
 class DashboardScreen extends StatefulWidget {
-  const DashboardScreen({Key? key}) : super(key: key);
+  const DashboardScreen({Key? key, required String userEmailID, required String userDisplayName}) :
+        _userEMailID = userEmailID,
+        _userDisplayName = userDisplayName,
+        super(key: key);
+
+  final String _userEMailID;
+  final String _userDisplayName;
 
   @override
   _DashboardScreenState createState() => _DashboardScreenState();
 }
 
+
+
 class _DashboardScreenState extends State<DashboardScreen> {
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
+
+    String name = widget._userDisplayName;
+
     return Scaffold(
         backgroundColor: Palette.firebaseNavy,
         body: SafeArea(
@@ -33,7 +52,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 Padding(
                   padding: const EdgeInsets.all(18.0),
                   child: Text(
-                    "Welcome, Sai Kiran !",
+                    "Welcome, $name !",
                     style: TextStyle(
                         color: Colors.white,
                         fontSize: 28.0,
@@ -67,12 +86,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                     padding: const EdgeInsets.all(20.0),
                                     child: Column(
                                       children: <Widget>[
-                                        Image.asset("assets/images/todo.png",width: 64.0,),
-                                        SizedBox(
-                                          height: 12.0,
-                                        ),
+                                        Image.asset("assets/images/note.png",width: 64.0,),
+                                        SizedBox(height: 12.0,),
                                         Text(
-                                          "Connect",
+                                          "Circulars",
                                           style: TextStyle(
                                               color: Colors.white,
                                               fontWeight: FontWeight.bold,
@@ -102,12 +119,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                   padding: const EdgeInsets.all(20.0),
                                   child: Column(
                                     children: <Widget>[
-                                      Image.asset("assets/images/note.png",width: 64.0,),
+                                      Image.asset("assets/images/connect_image.png",width: 64.0,),
                                       SizedBox(
                                         height: 12.0,
                                       ),
                                       Text(
-                                        "Materials",
+                                        "Connect",
                                         style: TextStyle(
                                             color: Colors.white,
                                             fontWeight: FontWeight.bold,

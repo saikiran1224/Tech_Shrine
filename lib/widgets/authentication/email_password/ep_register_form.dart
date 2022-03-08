@@ -56,16 +56,15 @@ class _EPRegisterFormState extends State<EPRegisterForm> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    _loadSharedPrefs();
   }
 
-  void _loadSharedPrefs() async {
+ /* void _loadSharedPrefs() async {
 
     final prefs = await SharedPreferences.getInstance();
     setState(() {
       prefs.setString("userName", _nameController.text.toString());
     });
-  }
+  }*/
 
   @override
   Widget build(BuildContext context) {

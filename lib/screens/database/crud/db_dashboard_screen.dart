@@ -28,11 +28,13 @@ class _DbDashboardScreenState extends State<DbDashboardScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
+/*
           Navigator.of(context).push(
             MaterialPageRoute(
               builder: (context) => DbAddScreen(),
             ),
           );
+*/
         },
         backgroundColor: Palette.firebaseOrange,
         child: Icon(

@@ -5,6 +5,8 @@ import 'package:flutterfire_samples/utils/database.dart';
 import 'package:flutterfire_samples/utils/pdfviewer_screen.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
+import '../../widgets/app_bar_title.dart';
+
 class CircularsScreen extends StatefulWidget {
   const CircularsScreen({Key? key}) : super(key: key);
 
@@ -39,15 +41,19 @@ class _CircularsScreenState extends State<CircularsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Palette.firebaseNavy,
       appBar: AppBar(
-        title: Text('Circulars'),
-        elevation: 2,
+        elevation: 0,
+        backgroundColor: Palette.firebaseNavy,
+        title: AppBarTitle(
+          sectionName: 'Circulars',
+        ),
       ),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.only(
-            left: 16.0,
-            right: 16.0,
+            left: 10.0,
+            right: 10.0,
             bottom: 20.0,
           ),
           child: Column(
@@ -61,33 +67,46 @@ class _CircularsScreenState extends State<CircularsScreen> {
                           itemCount: snapshot.data?.length ?? 0,
                           itemBuilder: (context,index) {
                             final Reference ref = snapshot.data![index];
-                            return Card(
-                              margin: const EdgeInsets.symmetric(vertical: 10),
-                              child: ListTile(
-                                leading: Image.asset("assets/images/firebase_logo.png", width: 25.0),
-                                dense: false,
-                                title: Text(ref.name.toString()),
-                                onTap: () async {
-                                  String downloadUrl = "";
-                                  ref.getDownloadURL().then((value) {
-                                    print("Downloaded $value");
-                                    downloadUrl = value;
-                                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) =>
-                                        PDFViewerScreen(fileName: ref.name.toString(),url: downloadUrl)));
-                                    print(downloadUrl);
-                                  });
+                            return Padding(
+                                padding: const EdgeInsets.only(
+                                  left: 10.0,
+                                  right: 10.0,
+                                  bottom: 10.0,
+                                ),
+                                child: Card(
+                                  margin: const EdgeInsets.symmetric(vertical: 10),
+                                  child: ListTile(
+                                    leading: Image.asset("assets/images/pdf_image.png", width: 60.0,),
+                                    dense: false,
+                                    textColor: Colors.green,
+                                    title: Text(ref.name.toString()),
+                                    onTap: () async {
+                                      String downloadUrl = "";
+                                      ref.getDownloadURL().then((value) {
+                                        print("Downloaded $value");
+                                        downloadUrl = value;
+                                        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) =>
+                                            PDFViewerScreen(fileName: ref.name.toString(),url: downloadUrl)));
+                                        print(downloadUrl);
+                                      });
 
-                                 // print(downloadUrl);
-                                 //await SfPdfViewer.network(downloadUrl);
-                                  //print(ref.getDownloadURL().toString() + " Download URL: " + downloadUrl);
-                                },
-                              ),
+                                      // print(downloadUrl);
+                                      //await SfPdfViewer.network(downloadUrl);
+                                      //print(ref.getDownloadURL().toString() + " Download URL: " + downloadUrl);
+                                    },
+                                  ),
+                                ),
+
                             );
                           });
                     }
 
-                    return const Center(
-                      child: CircularProgressIndicator(),
+                    return Center(
+                      child: CircularProgressIndicator(
+                        valueColor: AlwaysStoppedAnimation<Color>(
+                          Palette.firebaseOrange,
+                        ),
+                      ),
                     );
                   },
                 ),

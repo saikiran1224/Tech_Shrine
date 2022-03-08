@@ -281,7 +281,7 @@ class _EPUserInfoScreenState extends State<EPUserInfoScreen> {
                           await Navigator.push(context,
                               PageTransition(
                                   type: PageTransitionType.fade,
-                                  child: DbAddScreen()));
+                                  child: DbAddScreen(userDisplayName: _user.displayName.toString())));
 
                           //TODO: For reverse ripple effect animation
                           setState(() {
