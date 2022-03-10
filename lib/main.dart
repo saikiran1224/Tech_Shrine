@@ -17,11 +17,11 @@ import 'package:device_preview/device_preview.dart';
 
 void main() {
   runApp(
-    MyApp()
-    /*DevicePreview(
+    //MyApp()
+    DevicePreview(
       enabled: !kReleaseMode,
       builder: (context) => MyApp(), // Wrap your app
-    ),*/
+    ),
   );
 }
 
@@ -32,8 +32,8 @@ class MyApp extends StatelessWidget {
       title: 'FlutterFire Samples',
       debugShowCheckedModeBanner: false,
       useInheritedMediaQuery: true,
-      //locale: DevicePreview.locale(context),
-      //builder: DevicePreview.appBuilder,
+      locale: DevicePreview.locale(context),
+      builder: DevicePreview.appBuilder,
       theme: ThemeData(
         primarySwatch: Colors.indigo,
         brightness: Brightness.dark,
