@@ -3,23 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>132381301913-1eejtkfo1pf4lf9pkq737rf1skng2ekf.apps.googleusercontent.com</string>
+	<string>815352291722-fgl10nr4u10mu7v7cefb3v9hb15kkfni.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.132381301913-1eejtkfo1pf4lf9pkq737rf1skng2ekf</string>
-	<key>ANDROID_CLIENT_ID</key>
-	<string>132381301913-arlh75vdfauoievt3mgtuau0qje9jdg2.apps.googleusercontent.com</string>
+	<string>com.googleusercontent.apps.815352291722-fgl10nr4u10mu7v7cefb3v9hb15kkfni</string>
 	<key>API_KEY</key>
-	<string>AIzaSyBe_fPPDQTnEfq7ZFKa2kYAdDKkmFIsQI8</string>
+	<string>AIzaSyA5f70V7Wh5fF3cVfLMUIKg8n0y3lNlBv0</string>
 	<key>GCM_SENDER_ID</key>
-	<string>132381301913</string>
+	<string>815352291722</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.souvikbiswas.flutterfireSamples</string>
+	<string>com.gmrit.techshrine.techshrine</string>
 	<key>PROJECT_ID</key>
-	<string>flutterfire-samples</string>
+	<string>techshrine-da017</string>
 	<key>STORAGE_BUCKET</key>
-	<string>flutterfire-samples.appspot.com</string>
+	<string>techshrine-da017.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -31,6 +29,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:132381301913:ios:7a50d1273dd06c801eec08</string>
+	<string>1:815352291722:ios:153dcc99c94b2854456873</string>
+	<key>DATABASE_URL</key>
+	<string>https://techshrine-da017-default-rtdb.firebaseio.com</string>
 </dict>
 </plist>

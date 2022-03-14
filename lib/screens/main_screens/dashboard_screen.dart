@@ -3,8 +3,6 @@ import 'package:flutterfire_samples/res/custom_colors.dart';
 import 'package:flutterfire_samples/screens/main_screens/circulars_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-
-
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({Key? key, required String userEmailID, required String userDisplayName}) :
         _userEMailID = userEmailID,
@@ -17,7 +15,6 @@ class DashboardScreen extends StatefulWidget {
   @override
   _DashboardScreenState createState() => _DashboardScreenState();
 }
-
 
 
 class _DashboardScreenState extends State<DashboardScreen> {
