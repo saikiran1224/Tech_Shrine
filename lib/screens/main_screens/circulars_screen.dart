@@ -1,8 +1,8 @@
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterfire_samples/res/custom_colors.dart';
-import 'package:flutterfire_samples/utils/database.dart';
-import 'package:flutterfire_samples/utils/pdfviewer_screen.dart';
+import 'package:flutterfire_samples/utils/db_queries.dart';
+import 'package:flutterfire_samples/screens/main_screens/pdfviewer_screen.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
 import '../../widgets/app_bar_title.dart';
@@ -24,17 +24,14 @@ class _CircularsScreenState extends State<CircularsScreen> {
     ListResult result = await ref.listAll();
 
     result.items.forEach((Reference ref) {
-
       // Adding the list of all the files available
       files.add(ref);
-
       print('Found file: $ref');
     });
 
     result.prefixes.forEach((Reference ref) {
       print('Found directory: $ref');
     });
-
     return files;
   }
 

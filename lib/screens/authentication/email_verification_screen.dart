@@ -2,8 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterfire_samples/res/custom_colors.dart';
-import 'package:flutterfire_samples/screens/database/crud/db_add_screen.dart';
-import 'package:flutterfire_samples/utils/ep_authentication.dart';
+import 'package:flutterfire_samples/screens/authentication/student_details_screen.dart';
+import 'package:flutterfire_samples/utils/auth_utils.dart';
 import 'package:flutterfire_samples/widgets/app_bar_title.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:toggle_switch/toggle_switch.dart';
@@ -11,7 +11,7 @@ import 'package:toggle_switch/toggle_switch.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:swipeable_button_view/swipeable_button_view.dart';
 
-import 'ep_sign_in_screen.dart';
+import 'sign_in_screen.dart';
 
 class EPUserInfoScreen extends StatefulWidget {
   const EPUserInfoScreen({Key? key, required User user})
@@ -243,7 +243,7 @@ class _EPUserInfoScreenState extends State<EPUserInfoScreen> {
                     children: [
                       Center(
                         child: Text(
-                          'Congratulations! You are all set to enter the application',
+                          'Congratulations! You are one step ahead to enter into our application',
                           textAlign: TextAlign.center,
                           style: TextStyle(
                               color: Palette.firebaseGrey.withOpacity(0.8),
@@ -281,7 +281,7 @@ class _EPUserInfoScreenState extends State<EPUserInfoScreen> {
                           await Navigator.push(context,
                               PageTransition(
                                   type: PageTransitionType.fade,
-                                  child: DbAddScreen(userDisplayName: _user.displayName.toString())));
+                                  child: StudentDetailsScreen(user: _user,userDisplayName: _user.displayName.toString(), userEmailID: _user.email.toString())));
 
                           //TODO: For reverse ripple effect animation
                           setState(() {

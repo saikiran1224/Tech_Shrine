@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
-import '../res/custom_colors.dart';
-import '../widgets/app_bar_title.dart';
+import '../../res/custom_colors.dart';
+import '../../widgets/app_bar_title.dart';
 
 class PDFViewerScreen extends StatefulWidget {
   

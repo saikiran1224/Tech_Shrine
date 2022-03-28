@@ -5,12 +5,12 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterfire_samples/res/custom_colors.dart';
 import 'package:flutterfire_samples/screens/main_screens/dashboard_screen.dart';
-import 'package:flutterfire_samples/utils/database.dart';
+import 'package:flutterfire_samples/utils/db_queries.dart';
 import 'package:flutterfire_samples/utils/db_validator.dart';
+import 'package:flutterfire_samples/widgets/custom_form_field.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 
-import '../../custom_form_field.dart';
 
 class DbAddItemForm extends StatefulWidget {
   final FocusNode nameFocusNode;
@@ -20,9 +20,13 @@ class DbAddItemForm extends StatefulWidget {
   final FocusNode interestsFocusNode;
 
   final String userDisplayName;
+  final String userEmailID;
+  final User user;
 
   const DbAddItemForm(
-      {required this.userDisplayName,
+      { required this.user,
+        required this.userDisplayName,
+        required this.userEmailID,
       required this.nameFocusNode,
       required this.emailFocusNode,
       required this.jntuFocusNode,
@@ -49,15 +53,16 @@ class _DbAddItemFormState extends State<DbAddItemForm>{
 
   String userEmailID = "";
   String userDisplayName = "";
+  User? user;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    _loadSharedPrefs();
+    //_loadSharedPrefs();
   }
 
-  void _loadSharedPrefs() async {
+ /* void _loadSharedPrefs() async {
 
     final prefs = await SharedPreferences.getInstance();
 
@@ -67,12 +72,13 @@ class _DbAddItemFormState extends State<DbAddItemForm>{
     });
 
    // _nameController.text = userDisplayName;
-  }
+  }*/
 
   @override
   Widget build(BuildContext context) {
 
     _nameController.text = widget.userDisplayName;
+    user = widget.user;
 
     return Form(
         key: _addItemFormKey,
@@ -265,7 +271,7 @@ class _DbAddItemFormState extends State<DbAddItemForm>{
 
                               await Database.addItem(
                                   name: _nameController.text,
-                                  emailID: userEmailID,
+                                  emailID: widget.userEmailID,
                                   jntuNo: _jntuController.text,
                                   interests: _interestsController.text,
                                   shortIntro: _shortIntroController.text,
@@ -282,7 +288,7 @@ class _DbAddItemFormState extends State<DbAddItemForm>{
                             await prefs.setBool("userRegisteredStatus", true);
 
 
-                              Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => DashboardScreen(userEmailID: userEmailID, userDisplayName: _nameController.text.toString())));
+                              Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => DashboardScreen(user: widget.user,userEmailID: userEmailID, userDisplayName: _nameController.text.toString())));
                           }
                         },
                         child: Padding(

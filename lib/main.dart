@@ -6,22 +6,21 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterfire_samples/res/custom_colors.dart';
-import 'package:flutterfire_samples/screens/authentication/email_password/ep_sign_in_screen.dart';
-import 'package:flutterfire_samples/screens/authentication/email_password/ep_user_info_screen.dart';
+import 'package:flutterfire_samples/screens/authentication/sign_in_screen.dart';
+import 'package:flutterfire_samples/screens/authentication/email_verification_screen.dart';
 import 'package:flutterfire_samples/screens/main_screens/dashboard_screen.dart';
 import 'package:flutterfire_samples/screens/onboarding/onboarding_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'screens/main_screens/home_screen.dart';
 import 'package:device_preview/device_preview.dart';
 
 void main() {
   runApp(
-    //MyApp()
-    DevicePreview(
+    MyApp()
+    /*DevicePreview(
       enabled: !kReleaseMode,
       builder: (context) => MyApp(), // Wrap your app
-    ),
+    ),*/
   );
 }
 
@@ -32,8 +31,8 @@ class MyApp extends StatelessWidget {
       title: 'FlutterFire Samples',
       debugShowCheckedModeBanner: false,
       useInheritedMediaQuery: true,
-      locale: DevicePreview.locale(context),
-      builder: DevicePreview.appBuilder,
+     // locale: DevicePreview.locale(context),
+     // builder: DevicePreview.appBuilder,
       theme: ThemeData(
         primarySwatch: Colors.indigo,
         brightness: Brightness.dark,
@@ -78,7 +77,12 @@ class _MyHomePageState extends State<MyHomePage> {
     return firebaseApp;
   }
 
-  Future<bool> _loadSharedPrefs() async {
+  Future<bool> _checkUserRegisteredStatus() async {
+
+    // initialising Cloud Firestore and checking whether the Name is
+
+
+    // initialise Shared Preferences
     final prefs = await SharedPreferences.getInstance();
 
     _isUserRegisteredStatus = prefs.getBool("userRegisteredStatus")!;
@@ -96,7 +100,7 @@ class _MyHomePageState extends State<MyHomePage> {
         if(_isUserSignedIn == true) {
 
           if(_isUserRegisteredStatus)
-            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => DashboardScreen(userEmailID: _user.email.toString(), userDisplayName: _user.displayName.toString(),)));
+            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => DashboardScreen(user: _user,userEmailID: _user.email.toString(), userDisplayName: _user.displayName.toString(),)));
           else
             Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => EPUserInfoScreen(user: _user)));
         }
@@ -150,7 +154,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 },
               ),
               FutureBuilder(
-                  future: _loadSharedPrefs(),
+                  future: _checkUserRegisteredStatus(),
                   builder: (context, snapshot) {
                     if (snapshot.hasError) {
                       //return Text('Error initializing Firebase');

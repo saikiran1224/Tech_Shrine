@@ -2,8 +2,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutterfire_samples/screens/authentication/email_password/ep_sign_in_screen.dart';
+import 'package:flutterfire_samples/screens/authentication/sign_in_screen.dart';
 import 'package:flutterfire_samples/utils/styles.dart';
+
+import '../authentication/sign_in_screen.dart';
 
 class OnboardingScreen extends StatefulWidget {
   @override

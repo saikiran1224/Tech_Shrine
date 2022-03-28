@@ -2,9 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterfire_samples/res/custom_colors.dart';
-import 'package:flutterfire_samples/widgets/authentication/email_password/ep_sign_in_form.dart';
-
-import 'ep_user_info_screen.dart';
+import 'package:flutterfire_samples/widgets/forms/sign_in_form.dart';
+import 'email_verification_screen.dart';
 
 class EPSignInScreen extends StatefulWidget {
   @override

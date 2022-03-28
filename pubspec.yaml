@@ -41,16 +41,14 @@ dependencies:
   firebase_storage: ^10.2.9
   syncfusion_flutter_pdfviewer: ^19.4.54-beta
 
-
-
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
-
 # The following section is specific to Flutter.
+
 flutter:
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
@@ -71,6 +69,8 @@ flutter:
     - assets/images/todo.png
     - assets/images/pdf_image.png
     - assets/images/connect_image.png
+    - assets/images/logout.png
+    - assets/images/logout_2.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

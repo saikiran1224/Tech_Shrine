@@ -18,9 +18,13 @@ class Database {
     /*DocumentReference documentReferencer =
         _mainCollection.doc(userUid).collection('items').doc();*/
 
-    // Separating the students based on the yearOfStudy
-    DocumentReference documentReferencer =
-    _mainCollection.doc(userUid).collection(yearOfStudy).doc();
+    // We are doing two things
+    // First we have created two collections
+    // Global Student Data and students based on their Year
+
+    DocumentReference documentReferencer0 = _firestore.collection('students_data').doc(userUid);
+
+    DocumentReference documentReferencer1 = _firestore.collection(yearOfStudy).doc(userUid);
 
     Map<String, dynamic> data = <String, dynamic>{
       "name": name,
@@ -31,7 +35,14 @@ class Database {
       "shortIntro": shortIntro
     };
 
-    await documentReferencer
+    // passing first document
+    await documentReferencer0
+        .set(data)
+        .whenComplete(() => print("Student successfully added to the database"))
+        .catchError((e) => print(e));
+
+    // passing second document
+    await documentReferencer1
         .set(data)
         .whenComplete(() => print("Student successfully added to the database"))
         .catchError((e) => print(e));

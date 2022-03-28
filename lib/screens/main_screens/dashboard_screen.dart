@@ -1,10 +1,12 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterfire_samples/res/custom_colors.dart';
+import 'package:flutterfire_samples/screens/authentication/sign_in_screen.dart';
 import 'package:flutterfire_samples/screens/main_screens/circulars_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class DashboardScreen extends StatefulWidget {
-  const DashboardScreen({Key? key, required String userEmailID, required String userDisplayName}) :
+  const DashboardScreen({Key? key,required User user,required String userEmailID, required String userDisplayName}) :
         _userEMailID = userEmailID,
         _userDisplayName = userDisplayName,
         super(key: key);
@@ -19,6 +21,27 @@ class DashboardScreen extends StatefulWidget {
 
 class _DashboardScreenState extends State<DashboardScreen> {
 
+  Route _routeToSignInScreen() {
+    return PageRouteBuilder(
+      pageBuilder: (context, animation, secondaryAnimation) => EPSignInScreen(),
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        var begin = Offset(-1.0, 0.0);
+        var end = Offset.zero;
+        var curve = Curves.ease;
+
+        var tween =
+        Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+
+        return SlideTransition(
+          position: animation.drive(tween),
+          child: child,
+        );
+      },
+    );
+  }
+
+
+
   @override
   void initState() {
     // TODO: implement initState
@@ -29,6 +52,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   Widget build(BuildContext context) {
 
     String name = widget._userDisplayName;
+    String emailID = widget._userEMailID;
 
     return Scaffold(
         backgroundColor: Palette.firebaseNavy,
@@ -105,7 +129,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           width:160.0,
                           height: 160.0,
                           child: Card(
-
                             color: Color.fromARGB(255,21, 21, 21),
                             elevation: 2.0,
                             shape: RoundedRectangleBorder(
@@ -177,23 +200,36 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                 borderRadius: BorderRadius.circular(8.0)
                             ),
                             child:Center(
-                                child: Padding(
-                                  padding: const EdgeInsets.all(20.0),
-                                  child: Column(
-                                    children: <Widget>[
-                                      Image.asset("assets/images/settings.png",width: 64.0,),
-                                      SizedBox(
-                                        height: 12.0,
-                                      ),
-                                      Text(
-                                        "Settings",
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 20.0
+                                child: InkWell(
+                                  onTap: () async {
+                                    // Signing out User
+                                    await FirebaseAuth.instance.signOut();
+
+                                    // Change the status in Shared Preferences
+                                    final prefs = await SharedPreferences.getInstance();
+
+                                    await prefs.setBool("userRegisteredStatus", false);
+
+                                    Navigator.of(context).pushReplacement(_routeToSignInScreen());
+                                  },
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(20.0),
+                                    child: Column(
+                                      children: <Widget>[
+                                        Image.asset("assets/images/logout_2.png",width: 64.0,),
+                                        SizedBox(
+                                          height: 12.0,
                                         ),
-                                      ),
-                                    ],
+                                        Text(
+                                          "Logout",
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 20.0
+                                          ),
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 )
                             ),

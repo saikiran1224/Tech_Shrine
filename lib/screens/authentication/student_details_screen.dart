@@ -2,20 +2,25 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterfire_samples/res/custom_colors.dart';
 import 'package:flutterfire_samples/widgets/app_bar_title.dart';
-import 'package:flutterfire_samples/widgets/database/crud/db_add_item_form.dart';
 
-class DbAddScreen extends StatefulWidget {
-  const DbAddScreen({Key? key, required String userDisplayName}) :
+import 'package:flutterfire_samples/widgets/forms/student_details_form.dart';
+
+class StudentDetailsScreen extends StatefulWidget {
+  const StudentDetailsScreen({Key? key, required User user,required String userDisplayName, required String userEmailID}) :
+         _user = user,
         _userDisplayName = userDisplayName,
+        _userEmailID = userEmailID,
         super(key: key);
 
   final String _userDisplayName;
+  final String _userEmailID;
+  final User _user;
 
   @override
-  State<DbAddScreen> createState() => _DbAddScreenState();
+  State<StudentDetailsScreen> createState() => _StudentDetailsScreenState();
 }
 
-class _DbAddScreenState extends State<DbAddScreen> {
+class _StudentDetailsScreenState extends State<StudentDetailsScreen> {
 
   final FocusNode _nameFocusNode = FocusNode();
   final FocusNode _emailFocusNode = FocusNode();
@@ -57,7 +62,9 @@ class _DbAddScreenState extends State<DbAddScreen> {
               bottom: 20.0,
             ),
             child: DbAddItemForm(
+                user: widget._user,
                 userDisplayName: widget._userDisplayName,
+                userEmailID: widget._userEmailID,
                 nameFocusNode: _nameFocusNode,
                 emailFocusNode: _emailFocusNode,
                 jntuFocusNode: _jntuFocusNode,
