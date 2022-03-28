@@ -11,13 +11,15 @@ import 'package:flutterfire_samples/widgets/custom_form_field.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 
+import 'package:flutterfire_samples/utils/custom_drop_down.dart';
+
 
 class DbAddItemForm extends StatefulWidget {
   final FocusNode nameFocusNode;
   final FocusNode emailFocusNode;
   final FocusNode jntuFocusNode;
   final FocusNode shortIntroFocusNode;
-  final FocusNode interestsFocusNode;
+  final FocusNode phoneFocusNode;
 
   final String userDisplayName;
   final String userEmailID;
@@ -31,7 +33,7 @@ class DbAddItemForm extends StatefulWidget {
       required this.emailFocusNode,
       required this.jntuFocusNode,
       required this.shortIntroFocusNode,
-      required this.interestsFocusNode});
+      required this.phoneFocusNode});
 
   @override
   _DbAddItemFormState createState() => _DbAddItemFormState();
@@ -49,11 +51,64 @@ class _DbAddItemFormState extends State<DbAddItemForm>{
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _jntuController = TextEditingController();
   final TextEditingController _shortIntroController = TextEditingController();
-  final TextEditingController _interestsController = TextEditingController();
+  final TextEditingController _phoneNumberController = TextEditingController();
+
+  final TextEditingController _domainSelectedController = TextEditingController();
 
   String userEmailID = "";
   String userDisplayName = "";
   User? user;
+
+  // Declaring the list of Domains
+  final List<SelectedListItem> _listOfDomains = [
+    SelectedListItem(false, "Android"),
+    SelectedListItem(false, "HTML"),
+    SelectedListItem(false, "CSS"),
+    SelectedListItem(false, "Javascript"),
+    SelectedListItem(false, "ReactJs"),
+    SelectedListItem(false, "NodeJs"),
+    SelectedListItem(false, "Flutter"),
+    SelectedListItem(false, "React Native"),
+    SelectedListItem(false, "Mongo DB"),
+    SelectedListItem(false, "Machine Learning"),
+    SelectedListItem(false, "Deep Learning"),
+    SelectedListItem(false, "Artificial Intelligence"),
+    SelectedListItem(false, "Data Science"),
+    SelectedListItem(false, "Data Analytics")
+  ];
+
+  TextEditingController _searchTextEditingController = TextEditingController();
+
+  /// This is on text changed method which will display on city text field on changed.
+  void onTextFieldTap() {
+    DropDownState(
+      DropDown(
+        submitButtonText: "Done",
+        submitButtonColor: const Color.fromRGBO(70, 76, 222, 1),
+        searchHintText: "Search your Domain",
+        bottomSheetTitle: "List of Domains",
+        searchBackgroundColor: Palette.firebaseYellow,
+        dataList: _listOfDomains,
+        selectedItems: (List<dynamic> selectedList) {
+          showSnackBar(selectedList.toString());
+        },
+        selectedItem: (String selected) {
+          //showSnackBar(selected);
+          _domainSelectedController.text = selected;
+        },
+        enableMultipleSelection: false,
+        searchController: _searchTextEditingController,
+      ),
+    ).showModal(context);
+  }
+
+  void showSnackBar(String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+      ),
+    );
+  }
 
   @override
   void initState() {
@@ -166,7 +221,7 @@ class _DbAddItemFormState extends State<DbAddItemForm>{
                     ),
                     SizedBox(height: 40.0),
                     Text(
-                      'Interested Domains',
+                      'Phone Number',
                       style: TextStyle(
                         color: Palette.firebaseGrey,
                         fontSize: 18.0,
@@ -176,18 +231,95 @@ class _DbAddItemFormState extends State<DbAddItemForm>{
                     ),
                     SizedBox(height: 8.0),
                     CustomFormField(
-                      maxLines: 3,
                       isLabelEnabled: false,
-                      controller: _interestsController,
-                      focusNode: widget.interestsFocusNode,
+                      controller: _phoneNumberController,
+                      focusNode: widget.phoneFocusNode,
                       keyboardType: TextInputType.text,
                       inputAction: TextInputAction.next,
+
                       validator: (value) => DbValidator.validateField(
                         value: value,
                       ),
-                      label: 'Share your Interested Domains',
+                      label: 'Enter your Phone Number',
                       hint:
-                          'Enter your Interested Domains separated with Comma(,)',
+                          'Enter your Phone Number',
+                    ),
+                    SizedBox(height: 40.0),
+                    Text(
+                      'Choose your Major Domain',
+                      style: TextStyle(
+                        color: Palette.firebaseGrey,
+                        fontSize: 18.0,
+                        letterSpacing: 1,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    SizedBox(height: 8.0),
+                    /*InkWell(
+                      onTap: () {
+                        FocusScope.of(context).unfocus();
+                        onTextFieldTap();
+                      },
+                      child: CustomFormField(
+                        isLabelEnabled: false,
+                        controller: _domainSelectedController,
+                        focusNode: widget.emailFocusNode, // temporarily written
+                        keyboardType: TextInputType.text,
+                        inputAction: TextInputAction.next,
+                        validator: (value) => DbValidator.validateField(
+                          value: value,
+                        ),
+                        label: 'Choose your Major Domain',
+                        hint:
+                        'Select your Major Domain',
+                      ),
+                    )*/
+                    TextFormField(
+                      onTap: () {
+                        FocusScope.of(context).unfocus();
+                        onTextFieldTap();
+                      },
+                      controller: _domainSelectedController,
+                      cursorColor: Colors.black,
+                      decoration: InputDecoration(
+                      labelText: null,
+                      labelStyle: TextStyle(color: Palette.firebaseYellow),
+                      hintText: "Choose your Domain",
+                      hintStyle: TextStyle(
+                        color: Palette.firebaseGrey.withOpacity(0.5),
+                      ),
+                      errorStyle: TextStyle(
+                        color: Colors.redAccent,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8.0),
+                        borderSide: BorderSide(
+                          color: Palette.firebaseAmber,
+                          width: 2,
+                        ),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8.0),
+                        borderSide: BorderSide(
+                          color: Palette.firebaseGrey.withOpacity(0.5),
+                        ),
+                      ),
+                      errorBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8.0),
+                        borderSide: BorderSide(
+                          color: Colors.redAccent,
+                          width: 2,
+                        ),
+                      ),
+                      focusedErrorBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8.0),
+                        borderSide: BorderSide(
+                          color: Colors.redAccent,
+                          width: 2,
+                        ),
+                      ),
+                    ),
                     ),
                     SizedBox(height: 40.0),
                     Text(
@@ -243,7 +375,7 @@ class _DbAddItemFormState extends State<DbAddItemForm>{
                           widget.nameFocusNode.unfocus();
                           widget.emailFocusNode.unfocus();
                           widget.jntuFocusNode.unfocus();
-                          widget.interestsFocusNode.unfocus();
+                          widget.phoneFocusNode.unfocus();
                           widget.shortIntroFocusNode.unfocus();
 
                           if(_selectedIndex == -1) {
@@ -273,9 +405,10 @@ class _DbAddItemFormState extends State<DbAddItemForm>{
                                   name: _nameController.text,
                                   emailID: widget.userEmailID,
                                   jntuNo: _jntuController.text,
-                                  interests: _interestsController.text,
+                                  phoneNumber: _phoneNumberController.text,
                                   shortIntro: _shortIntroController.text,
-                                  yearOfStudy: selectedYearOfStudy);
+                                  yearOfStudy: selectedYearOfStudy,
+                                  majorDomain: _domainSelectedController.text);
 
                               setState(() {
                                 _isProcessing = false;

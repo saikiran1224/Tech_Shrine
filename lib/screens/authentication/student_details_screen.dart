@@ -25,7 +25,7 @@ class _StudentDetailsScreenState extends State<StudentDetailsScreen> {
   final FocusNode _nameFocusNode = FocusNode();
   final FocusNode _emailFocusNode = FocusNode();
   final FocusNode _jntuFocusNode = FocusNode();
-  final FocusNode _interestsFocusNode = FocusNode();
+  final FocusNode _phoneFocusNode = FocusNode();
   final FocusNode _shortIntroFocusNode = FocusNode();
 
   @override
@@ -42,7 +42,7 @@ class _StudentDetailsScreenState extends State<StudentDetailsScreen> {
         _nameFocusNode.unfocus();
         _emailFocusNode.unfocus();
         _jntuFocusNode.unfocus();
-        _interestsFocusNode.unfocus();
+        _phoneFocusNode.unfocus();
         _shortIntroFocusNode.unfocus();
       },
       child: Scaffold(
@@ -68,7 +68,7 @@ class _StudentDetailsScreenState extends State<StudentDetailsScreen> {
                 nameFocusNode: _nameFocusNode,
                 emailFocusNode: _emailFocusNode,
                 jntuFocusNode: _jntuFocusNode,
-                interestsFocusNode: _interestsFocusNode,
+                phoneFocusNode: _phoneFocusNode,
                 shortIntroFocusNode: _shortIntroFocusNode
             ),
           ),

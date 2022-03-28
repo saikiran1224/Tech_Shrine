@@ -11,9 +11,10 @@ class Database {
     required String name,
     required String emailID,
     required String jntuNo,
-    required String interests,
+    required String phoneNumber,
     required String shortIntro,
-    required String yearOfStudy
+    required String yearOfStudy,
+    required String majorDomain
   }) async {
     /*DocumentReference documentReferencer =
         _mainCollection.doc(userUid).collection('items').doc();*/
@@ -31,8 +32,9 @@ class Database {
       "emailID": emailID,
       "jntuNo" : jntuNo,
       "yearOfStudy": yearOfStudy,
-      "interests":interests,
-      "shortIntro": shortIntro
+      "phoneNumber":phoneNumber,
+      "shortIntro": shortIntro,
+      "majorDomain":majorDomain
     };
 
     // passing first document
