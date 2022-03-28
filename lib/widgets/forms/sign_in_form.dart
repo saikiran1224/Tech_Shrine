@@ -1,10 +1,14 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterfire_samples/res/custom_colors.dart';
 import 'package:flutterfire_samples/screens/authentication/sign_up_screen.dart';
 import 'package:flutterfire_samples/screens/authentication/email_verification_screen.dart';
+import 'package:flutterfire_samples/screens/main_screens/dashboard_screen.dart';
 import 'package:flutterfire_samples/utils/auth_utils.dart';
 import 'package:flutterfire_samples/utils/auth_validator.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:web_ffi/web_ffi.dart';
 
 import '../custom_form_field.dart';
 
@@ -28,6 +32,24 @@ class _EPSignInFormState extends State<EPSignInForm> {
   final _signInFormKey = GlobalKey<FormState>();
 
   bool _isSigningIn = false;
+
+
+
+  Future<String> _checkUserAlreadyRegistered(String userEmailID) async {
+
+    String _userDisplayName = "";
+
+    var result = await FirebaseFirestore.instance.collection("students_data")
+    .where("emailID",isEqualTo: userEmailID).get();
+    
+    result.docs.forEach((res) {
+        print(res.data()['name']);
+        _userDisplayName = res.data()['name'];
+        print("User's name: $_userDisplayName");
+    });
+
+    return _userDisplayName;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -95,6 +117,7 @@ class _EPSignInFormState extends State<EPSignInForm> {
                         ),
                       ),
                       onPressed: () async {
+
                         widget.emailFocusNode.unfocus();
                         widget.passwordFocusNode.unfocus();
 
@@ -102,22 +125,38 @@ class _EPSignInFormState extends State<EPSignInForm> {
                           _isSigningIn = true;
                         });
 
+                        // Once the validation of the fields are done it will be sent to check for Authentication
                         if (_signInFormKey.currentState!.validate()) {
-                          User? user =
-                              await EPAuthentication.signInUsingEmailPassword(
-                            context: context,
-                            email: _emailController.text,
-                            password: _passwordController.text,
-                          );
 
+                          String userEnteredEmailID = _emailController.text.toString();
+                          User? user = await EPAuthentication.signInUsingEmailPassword(context: context, email: _emailController.text, password: _passwordController.text);
+
+                         String userDisplayName =  await _checkUserAlreadyRegistered(userEnteredEmailID);
+
+
+                          // Checks user is authenticated or not
                           if (user != null) {
-                            Navigator.of(context).pushReplacement(
-                              MaterialPageRoute(
-                                builder: (context) => EPUserInfoScreen(
-                                  user: user,
-                                ),
-                              ),
-                            );
+
+                            // Checks whether the userDisplayName is retrieved or not -
+                            //   If retrieved - User is already registered so send him to Dashboard Screen by sending his Email ID and Display Name
+                            //   else - User will be sent to User Info Screen
+                            if(userDisplayName == "") {
+                              print("User Display Name: $userDisplayName");
+                              Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(builder: (context) =>
+                                    EPUserInfoScreen(user: user)),);
+                            } else {
+
+                                // initialising Shared Preferences
+                                final prefs = await SharedPreferences.getInstance();
+
+                                // setting user Registered
+                                await prefs.setBool("userRegisteredStatus", true);
+
+                                Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => DashboardScreen(user: user, userEmailID: _emailController.text.toString(), userDisplayName: userDisplayName as String)));
+
+                            }
+
                           }
                         }
 
