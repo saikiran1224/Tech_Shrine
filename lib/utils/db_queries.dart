@@ -27,6 +27,9 @@ class Database {
 
     DocumentReference documentReferencer1 = _firestore.collection(yearOfStudy).doc(userUid);
 
+    DocumentReference documentReferencer2 = _firestore.collection("Domains").doc(majorDomain);
+
+
     Map<String, dynamic> data = <String, dynamic>{
       "name": name,
       "emailID": emailID,
@@ -48,6 +51,14 @@ class Database {
         .set(data)
         .whenComplete(() => print("Student successfully added to the database"))
         .catchError((e) => print(e));
+
+    // passing third document
+    await documentReferencer2
+        .set(data)
+        .whenComplete(() => print("Student successfully added to the domain"))
+        .catchError((e) => print(e));
+
+
   }
 
   static Future<void> updateItem({

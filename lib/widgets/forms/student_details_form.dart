@@ -387,7 +387,17 @@ class _DbAddItemFormState extends State<DbAddItemForm>{
                             ScaffoldMessenger.of(context).showSnackBar(snackBar);
                           }
 
-                          if (_addItemFormKey.currentState!.validate() && _selectedIndex != -1) {
+                          if(_domainSelectedController.text == "") {
+                            final snackBar = SnackBar(
+                              content: Text('Please choose your Major Domain'),
+                              backgroundColor: Palette.firebaseGrey,
+                              action: null,
+                            );
+                            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                          }
+
+
+                          if (_addItemFormKey.currentState!.validate() && _selectedIndex != -1 && _domainSelectedController.text != "" ) {
 
                             setState(() {
                               _isProcessing = true;
@@ -419,6 +429,9 @@ class _DbAddItemFormState extends State<DbAddItemForm>{
 
                             // setting user Registered
                             await prefs.setBool("userRegisteredStatus", true);
+
+                            // Need to add the student to the respective domain list
+
 
 
                               Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => DashboardScreen(user: widget.user,userEmailID: userEmailID, userDisplayName: _nameController.text.toString())));

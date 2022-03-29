@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutterfire_samples/res/custom_colors.dart';
 import 'package:flutterfire_samples/screens/authentication/sign_in_screen.dart';
 import 'package:flutterfire_samples/screens/main_screens/circulars_screen.dart';
+import 'package:flutterfire_samples/screens/main_screens/connect_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class DashboardScreen extends StatefulWidget {
@@ -135,23 +136,28 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                 borderRadius: BorderRadius.circular(8.0)
                             ),
                             child:Center(
-                                child: Padding(
-                                  padding: const EdgeInsets.all(20.0),
-                                  child: Column(
-                                    children: <Widget>[
-                                      Image.asset("assets/images/connect_image.png",width: 64.0,),
-                                      SizedBox(
-                                        height: 12.0,
-                                      ),
-                                      Text(
-                                        "Connect",
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 20.0
+                                child: InkWell(
+                                  onTap: () {
+                                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => ConnectScreen()));
+                                  },
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(20.0),
+                                    child: Column(
+                                      children: <Widget>[
+                                        Image.asset("assets/images/connect_image.png",width: 64.0,),
+                                        SizedBox(
+                                          height: 12.0,
                                         ),
-                                      ),
-                                    ],
+                                        Text(
+                                          "Connect",
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 20.0
+                                          ),
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 )
                             ),

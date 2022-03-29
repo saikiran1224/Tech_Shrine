@@ -125,8 +125,10 @@ class _MainBodyState extends State<MainBody> {
                   /// Bottom sheet title text
                   Text(
                     widget.dropDown.bottomSheetTitle ?? 'Title',
-                    style: const TextStyle(
+                    style: TextStyle(
+                      color: Palette.firebaseOrange,
                         fontWeight: FontWeight.bold, fontSize: 20.0),
+
                   ),
                   Expanded(
                     child: Container(),
@@ -191,7 +193,7 @@ class _MainBodyState extends State<MainBody> {
                           title: Text(
                             mainList[index].name,
                           ),
-                          textColor: Palette.firebaseAmber,
+                          textColor: Palette.firebaseYellow,
                           trailing: widget.dropDown.enableMultipleSelection
                               ? GestureDetector(
                             onTap: () {
