@@ -7,4 +7,5 @@ class Palette {
   static final Color firebaseYellow = Color(0xFFFFCA28);
   static final Color firebaseGrey = Color(0xFFECEFF1);
   static final Color googleBackground = Color(0xFF4285F4);
+  static final Color flutterLogoBg = Color(0xFF042B59);
 }
