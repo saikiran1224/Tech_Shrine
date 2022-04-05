@@ -10,49 +10,176 @@ class ConnectScreen extends StatefulWidget {
 
   @override
   State<ConnectScreen> createState() => _ConnectScreenState();
-
 }
 
 class _ConnectScreenState extends State<ConnectScreen> {
-
-  final _scrollController = FixedExtentScrollController();
-
-  static const double _itemHeight = 60;
-  static const int _itemCount = 100;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Palette.firebaseNavy,
-      appBar: AppBar(
-        elevation: 0,
         backgroundColor: Palette.firebaseNavy,
-        title: AppBarTitle(
-          sectionName: 'Choose your Domain',
+        appBar: AppBar(
+          elevation: 0,
+          backgroundColor: Palette.firebaseNavy,
+          title: AppBarTitle(
+            sectionName: 'Choose your Domain',
+          ),
         ),
-      ),
-      body: SafeArea(
+        body: SingleChildScrollView(
           child: Padding(
-              padding: const EdgeInsets.only(
-                left: 25.0,
-                right: 25.0,
-                bottom: 20.0,
-              ),
-              child:,
+            padding: EdgeInsets.fromLTRB(10, 20, 10, 20),
+            child: Column(
+              children: [
+                InkWell(
+                  onTap: () {
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => CircularsScreen()));
+                  },
+                  child: Center(
+                      child: Container(
+                          height: 130,
+                          decoration: BoxDecoration(
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.lightBlueAccent.withOpacity(.5),
+                                  blurRadius: 30.0, // soften the shadow
+                                  spreadRadius: 5.0, //extend the shadow
+                                  offset: Offset(
+                                    5.0, // Move to right 10  horizontally
+                                    5.0, // Move to bottom 10 Vertically
+                                  ),
+                                )
+                              ],
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(15)),
+                          child: Center(
+                              child: Padding(
+                                padding: EdgeInsets.fromLTRB(25, 30, 40, 30),
+                                child: Image.asset('assets/images/flutter_logo.png',
+                                    height: 100),
+                              )))),
+                ), // Flutter
+                SizedBox(height: 25,),
+                Center(
+                    child: Container(
+                        height: 130,
+                        decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.greenAccent.withOpacity(.5),
+                                blurRadius: 30.0, // soften the shadow
+                                spreadRadius: 5.0, //extend the shadow
+                                offset: Offset(
+                                  5.0, // Move to right 10  horizontally
+                                  5.0, // Move to bottom 10 Vertically
+                                ),
+                              )
+                            ],
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(15)),
+                        child: Center(
+                            child: Padding(
+                              padding: EdgeInsets.fromLTRB(20, 25, 20, 25),
+                              child: Image.asset('assets/images/android_logo.png',
+                                  height: 100),
+                            )))), // Android
+                SizedBox(height: 25,),
+                Center(
+                    child: Container(
+                        height: 130,
+                        decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(.5),
+                                blurRadius: 30.0, // soften the shadow
+                                spreadRadius: 5.0, //extend the shadow
+                                offset: Offset(
+                                  5.0, // Move to right 10  horizontally
+                                  5.0, // Move to bottom 10 Vertically
+                                ),
+                              )
+                            ],
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(15)),
+                        child: Center(
+                            child: Padding(
+                              padding: EdgeInsets.fromLTRB(25, 25, 25, 25),
+                              child: Image.asset('assets/images/mern_logo.png',
+                                  height: 100),
+                            )))), // MERN Stack
+                SizedBox(height: 25,),
+                Center(
+                    child: Container(
+                        height: 130,
+                        decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.orangeAccent.withOpacity(.5),
+                                blurRadius: 30.0, // soften the shadow
+                                spreadRadius: 5.0, //extend the shadow
+                                offset: Offset(
+                                  5.0, // Move to right 10  horizontally
+                                  5.0, // Move to bottom 10 Vertically
+                                ),
+                              )
+                            ],
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(15)),
+                        child: Center(
+                            child: Padding(
+                              padding: EdgeInsets.fromLTRB(20, 25, 20, 20),
+                              child: Image.asset('assets/images/html_css_js_logo.png',
+                                  height: 100),
+                            )))), // HTML, CSS and JS
+                SizedBox(height: 25,),
+                Center(
+                    child: Container(
+                        height: 130,
+                        decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.pinkAccent.withOpacity(.5),
+                                blurRadius: 30.0, // soften the shadow
+                                spreadRadius: 5.0, //extend the shadow
+                                offset: Offset(
+                                  5.0, // Move to right 10  horizontally
+                                  5.0, // Move to bottom 10 Vertically
+                                ),
+                              )
+                            ],
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(15)),
+                        child: Center(
+                            child: Padding(
+                              padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
+                              child: Image.asset('assets/images/ml_logo.png',
+                                  height: 100),
+                            )))), // Machine Learning
+                SizedBox(height: 25,),
+                Center(
+                    child: Container(
+                        height: 130,
+                        decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.blue.withOpacity(.5),
+                                blurRadius: 30.0, // soften the shadow
+                                spreadRadius: 5.0, //extend the shadow
+                                offset: Offset(
+                                  5.0, // Move to right 10  horizontally
+                                  5.0, // Move to bottom 10 Vertically
+                                ),
+                              )
+                            ],
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(15)),
+                        child: Center(
+                            child: Padding(
+                              padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                              child: Image.asset('assets/images/data_science_logo.png',
+                                  height: 100),
+                            )))), // Data Science
+              ],
+            ),
+          )),
     );
   }
 }
-
-
-Container(
-height: 100,
-decoration: BoxDecoration(
-color: Palette.flutterLogoBg,
-borderRadius: BorderRadius.circular(15)),
-child: Center(
-child: Image.asset(
-'assets/images/flutter_logo.png', height: 100,
-),
-
-)
-),

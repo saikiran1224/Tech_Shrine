@@ -62,19 +62,11 @@ class _DbAddItemFormState extends State<DbAddItemForm>{
   // Declaring the list of Domains
   final List<SelectedListItem> _listOfDomains = [
     SelectedListItem(false, "Android"),
-    SelectedListItem(false, "HTML"),
-    SelectedListItem(false, "CSS"),
-    SelectedListItem(false, "Javascript"),
-    SelectedListItem(false, "ReactJs"),
-    SelectedListItem(false, "NodeJs"),
+    SelectedListItem(false, "HTML, CSS and JS"),
+    SelectedListItem(false, "MERN Stack"),
     SelectedListItem(false, "Flutter"),
-    SelectedListItem(false, "React Native"),
-    SelectedListItem(false, "Mongo DB"),
     SelectedListItem(false, "Machine Learning"),
-    SelectedListItem(false, "Deep Learning"),
-    SelectedListItem(false, "Artificial Intelligence"),
     SelectedListItem(false, "Data Science"),
-    SelectedListItem(false, "Data Analytics")
   ];
 
   TextEditingController _searchTextEditingController = TextEditingController();
