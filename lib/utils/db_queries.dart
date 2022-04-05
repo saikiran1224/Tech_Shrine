@@ -27,7 +27,7 @@ class Database {
 
     DocumentReference documentReferencer1 = _firestore.collection(yearOfStudy).doc(userUid);
 
-    DocumentReference documentReferencer2 = _firestore.collection("Domains").doc(majorDomain);
+    DocumentReference documentReferencer2 = _firestore.collection(majorDomain).doc(userUid);
 
 
     Map<String, dynamic> data = <String, dynamic>{
@@ -93,11 +93,9 @@ class Database {
 
   }
 
-  static Stream<QuerySnapshot> readItems() {
-    CollectionReference notesItemCollection =
-        _mainCollection.doc(userUid).collection('items');
-
-    return notesItemCollection.snapshots();
+  static Stream<QuerySnapshot> readTechies(String nameOfDomain) {
+    var techiesCollection = FirebaseFirestore.instance.collection(nameOfDomain).orderBy("yearOfStudy");
+    return techiesCollection.snapshots();
   }
 
 
