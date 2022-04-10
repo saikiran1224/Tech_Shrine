@@ -29,7 +29,7 @@ class _EPRegisterScreenState extends State<EPRegisterScreen> {
           elevation: 0,
           backgroundColor: Palette.firebaseNavy,
           title: AppBarTitle(
-            sectionName: 'Authentication',
+            sectionName: 'Create an Account',
           ),
         ),
         body: SafeArea(

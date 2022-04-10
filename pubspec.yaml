@@ -80,6 +80,7 @@ flutter:
     - assets/images/html_css_js_logo.png
     - assets/images/ml_logo.png
     - assets/images/data_science_logo.png
+    - assets/images/tech_shrine_logo.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

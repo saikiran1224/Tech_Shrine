@@ -16,11 +16,11 @@ class AppBarTitle extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
-        Image.asset(
-          'assets/images/firebase_logo.png',
+       /* Image.asset(
+          'assets/images/tech_shrine_logo.png',
           height: 20,
-        ),
-        SizedBox(width: 8),
+        ),*/
+        //SizedBox(width: 8),
         Text(
           ' $sectionName',
           style: TextStyle(

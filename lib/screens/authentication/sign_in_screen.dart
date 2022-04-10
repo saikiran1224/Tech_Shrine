@@ -62,7 +62,7 @@ class _EPSignInScreenState extends State<EPSignInScreen> {
                           Flexible(
                             flex: 1,
                             child: Image.asset(
-                              'assets/images/firebase_logo.png',
+                              'assets/images/tech_shrine_logo.png',
                               height: 160,
                             ),
                           ),

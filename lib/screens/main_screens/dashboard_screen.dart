@@ -68,7 +68,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
                       Icon(Icons.menu, color: Colors.white,size: 50.0,),
-                      Image.asset("assets/images/firebase_logo.png",width: 35.0)
+                      Image.asset("assets/images/tech_shrine_logo.png",width: 55.0,height: 40.0,)
                     ],
                   ),
                 ),

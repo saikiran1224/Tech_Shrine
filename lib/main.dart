@@ -127,16 +127,17 @@ class _MyHomePageState extends State<MyHomePage> {
            child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
-              SizedBox(width:150.0),
+              SizedBox(width:80.0,height: 150.0,),
               Center(
                 child: Image(
                   image: AssetImage(
-                    'assets/images/firebase_logo.png',
+                    'assets/images/tech_shrine_logo.png',
                   ),
-                  height: 600.0,
-                  width: MediaQuery.of(context).size.width,
+                  height: 400.0,
+                  width: 300.0,
                 ),
               ),
+              SizedBox(height: 50.0,),
               FutureBuilder(
                 future: _initializeFirebase(),
                 builder: (context, snapshot) {
