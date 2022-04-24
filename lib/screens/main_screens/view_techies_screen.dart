@@ -44,6 +44,10 @@ class _ViewTechiesScreenState extends State<ViewTechiesScreen> {
       appBar: AppBar(
         elevation: 2,
         backgroundColor: Palette.firebaseNavy,
+        leading: new IconButton(
+          icon: new Icon(Icons.arrow_back, color: Colors.orange),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
         title: AppBarTitle(
           sectionName: "Meet our Techies in " + widget._nameOfDomain,
         ),

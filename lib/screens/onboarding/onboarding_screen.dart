@@ -66,7 +66,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   alignment: Alignment.centerRight,
                   child: TextButton(
                     onPressed: () {
-                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => EPSignInScreen()));
+                      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => EPSignInScreen()));
                     },
                     child: Text(
                       'Skip',

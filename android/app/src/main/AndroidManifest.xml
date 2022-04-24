@@ -23,7 +23,7 @@
         </intent>
     </queries>
    <application
-        android:label="Tech Shrine"
+        android:label="TechShrine"
         android:icon="@mipmap/launcher_icon">
 
         <activity

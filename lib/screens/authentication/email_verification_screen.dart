@@ -208,12 +208,12 @@ class _EPUserInfoScreenState extends State<EPUserInfoScreen> {
                             child: Padding(
                               padding: EdgeInsets.only(top: 8.0, bottom: 8.0),
                               child: Text(
-                                'Verify',
+                                'Send Verification Email',
                                 style: TextStyle(
-                                  fontSize: 20,
+                                  fontSize: 18,
                                   fontWeight: FontWeight.bold,
                                   color: Palette.firebaseNavy,
-                                  letterSpacing: 2,
+                                  letterSpacing: 1,
                                 ),
                               ),
                             ),
@@ -278,7 +278,7 @@ class _EPUserInfoScreenState extends State<EPUserInfoScreen> {
                         },
                         isFinished: _isFinished,
                         onFinish: () async {
-                          await Navigator.push(context,
+                          await Navigator.of(context).pushReplacement(
                               PageTransition(
                                   type: PageTransitionType.fade,
                                   child: StudentDetailsScreen(user: _user,userDisplayName: _user.displayName.toString(), userEmailID: _user.email.toString())));

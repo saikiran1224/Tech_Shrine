@@ -1,6 +1,7 @@
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterfire_samples/res/custom_colors.dart';
+import 'package:flutterfire_samples/screens/main_screens/dashboard_screen.dart';
 import 'package:flutterfire_samples/utils/db_queries.dart';
 import 'package:flutterfire_samples/screens/main_screens/pdfviewer_screen.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
@@ -41,6 +42,10 @@ class _CircularsScreenState extends State<CircularsScreen> {
       backgroundColor: Palette.firebaseNavy,
       appBar: AppBar(
         elevation: 0,
+        leading: new IconButton(
+          icon: new Icon(Icons.arrow_back, color: Colors.orange),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
         backgroundColor: Palette.firebaseNavy,
         title: AppBarTitle(
           sectionName: 'Circulars',
@@ -48,23 +53,23 @@ class _CircularsScreenState extends State<CircularsScreen> {
       ),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.only(
-            left: 10.0,
-            right: 10.0,
-            bottom: 20.0,
-          ),
-          child: Column(
-            children: [
-              Expanded(
-                child: FutureBuilder(
-                  future: _loadAllCirculars(),
-                  builder: (BuildContext context, AsyncSnapshot<List<Reference>> snapshot) {
-                    if(snapshot.connectionState == ConnectionState.done) {
-                      return ListView.builder(
-                          itemCount: snapshot.data?.length ?? 0,
-                          itemBuilder: (context,index) {
-                            final Reference ref = snapshot.data![index];
-                            return Padding(
+            padding: const EdgeInsets.only(
+              left: 10.0,
+              right: 10.0,
+              bottom: 20.0,
+            ),
+            child: Column(
+              children: [
+                Expanded(
+                  child: FutureBuilder(
+                    future: _loadAllCirculars(),
+                    builder: (BuildContext context, AsyncSnapshot<List<Reference>> snapshot) {
+                      if(snapshot.connectionState == ConnectionState.done) {
+                        return ListView.builder(
+                            itemCount: snapshot.data?.length ?? 0,
+                            itemBuilder: (context,index) {
+                              final Reference ref = snapshot.data![index];
+                              return Padding(
                                 padding: const EdgeInsets.only(
                                   left: 10.0,
                                   right: 10.0,
@@ -82,7 +87,7 @@ class _CircularsScreenState extends State<CircularsScreen> {
                                       ref.getDownloadURL().then((value) {
                                         print("Downloaded $value");
                                         downloadUrl = value;
-                                        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) =>
+                                        Navigator.push(context,MaterialPageRoute(builder: (context) =>
                                             PDFViewerScreen(fileName: ref.name.toString(),url: downloadUrl)));
                                         print(downloadUrl);
                                       });
@@ -94,22 +99,22 @@ class _CircularsScreenState extends State<CircularsScreen> {
                                   ),
                                 ),
 
-                            );
-                          });
-                    }
+                              );
+                            });
+                      }
 
-                    return Center(
-                      child: CircularProgressIndicator(
-                        valueColor: AlwaysStoppedAnimation<Color>(
-                          Palette.firebaseOrange,
+                      return Center(
+                        child: CircularProgressIndicator(
+                          valueColor: AlwaysStoppedAnimation<Color>(
+                            Palette.firebaseOrange,
+                          ),
                         ),
-                      ),
-                    );
-                  },
-                ),
-              )
-            ],
-          )
+                      );
+                    },
+                  ),
+                )
+              ],
+            )
         ),
       ),
     );

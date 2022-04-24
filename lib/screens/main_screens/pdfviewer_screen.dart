@@ -37,8 +37,13 @@ class _PDFViewerScreenState extends State<PDFViewerScreen> {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Palette.firebaseNavy,
+        leading: new IconButton(
+          icon: new Icon(Icons.arrow_back, color: Colors.orange),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
         title: AppBarTitle(
           sectionName: _fileName,
+
         ),
       ),
       body: SfPdfViewer.network(_url),

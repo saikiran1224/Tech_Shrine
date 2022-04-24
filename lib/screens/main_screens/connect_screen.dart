@@ -21,6 +21,10 @@ class _ConnectScreenState extends State<ConnectScreen> {
         appBar: AppBar(
           elevation: 0,
           backgroundColor: Palette.firebaseNavy,
+          leading: new IconButton(
+            icon: new Icon(Icons.arrow_back, color: Colors.orange),
+            onPressed: () => Navigator.of(context).pop(),
+          ),
           title: AppBarTitle(
             sectionName: 'Choose your Domain',
           ),
@@ -32,7 +36,7 @@ class _ConnectScreenState extends State<ConnectScreen> {
               children: [
                 InkWell(
                   onTap: () {
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => ViewTechiesScreen(nameOfDomain: "Flutter")));
+                    Navigator.push(context,MaterialPageRoute(builder: (context) => ViewTechiesScreen(nameOfDomain: "Flutter")));
                   },
                   child: Center(
                       child: Container(
@@ -61,7 +65,7 @@ class _ConnectScreenState extends State<ConnectScreen> {
                 SizedBox(height: 25,),
                 InkWell(
                   onTap: () {
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => ViewTechiesScreen(nameOfDomain: "Android")));
+                    Navigator.push(context,MaterialPageRoute(builder: (context) => ViewTechiesScreen(nameOfDomain: "Android")));
                   },
                   child: Center(
                       child: Container(
@@ -90,7 +94,7 @@ class _ConnectScreenState extends State<ConnectScreen> {
                 SizedBox(height: 25,),
                 InkWell(
                   onTap: () {
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => ViewTechiesScreen(nameOfDomain: "MERN Stack")));
+                    Navigator.push(context,MaterialPageRoute(builder: (context) => ViewTechiesScreen(nameOfDomain: "MERN Stack")));
                   },
                   child: Center(
                       child: Container(
@@ -119,7 +123,7 @@ class _ConnectScreenState extends State<ConnectScreen> {
                 SizedBox(height: 25,),
                 InkWell(
                   onTap: () {
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => ViewTechiesScreen(nameOfDomain: "HTML, CSS and JS")));
+                    Navigator.push(context,MaterialPageRoute(builder: (context) => ViewTechiesScreen(nameOfDomain: "HTML, CSS and JS")));
                   },
                   child: Center(
                       child: Container(
@@ -148,7 +152,7 @@ class _ConnectScreenState extends State<ConnectScreen> {
                 SizedBox(height: 25,),
                 InkWell(
                   onTap: () {
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => ViewTechiesScreen(nameOfDomain: "Machine Learning")));
+                    Navigator.push(context,MaterialPageRoute(builder: (context) => ViewTechiesScreen(nameOfDomain: "Machine Learning")));
                   },
                   child: Center(
                       child: Container(
@@ -177,7 +181,7 @@ class _ConnectScreenState extends State<ConnectScreen> {
                 SizedBox(height: 25,),
                 InkWell(
                   onTap: () {
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => ViewTechiesScreen(nameOfDomain: "Data Science")));
+                    Navigator.push(context,MaterialPageRoute(builder: (context) => ViewTechiesScreen(nameOfDomain: "Data Science")));
                   },
                   child: Center(
                       child: Container(

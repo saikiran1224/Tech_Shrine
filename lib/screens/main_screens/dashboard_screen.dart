@@ -103,7 +103,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                             child:Center(
                                 child: InkWell(
                                   onTap: (){
-                                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => CircularsScreen()));
+                                    Navigator.push(context, MaterialPageRoute(builder: (context) => CircularsScreen()));
                                   },
                                   child: Padding(
                                     padding: const EdgeInsets.all(20.0),
@@ -139,7 +139,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                             child:Center(
                                 child: InkWell(
                                   onTap: () {
-                                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => ConnectScreen()));
+                                    Navigator.push(context,MaterialPageRoute(builder: (context) => ConnectScreen()));
                                   },
                                   child: Padding(
                                     padding: const EdgeInsets.all(20.0),
@@ -177,7 +177,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                             child:Center(
                                 child: InkWell(
                                   onTap: () {
-                                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) =>
+                                    Navigator.push(context,MaterialPageRoute(builder: (context) =>
                                         PDFViewerScreen(fileName: "Academic Calendar",url: "http://www.gmrit.org/B.Tech%207th%20&%208th%20Semester%20Academic%20Calendar%202021-22.pdf")));
                                   },
                                   child: Padding(
@@ -214,17 +214,29 @@ class _DashboardScreenState extends State<DashboardScreen> {
                             ),
                             child:Center(
                                 child: InkWell(
-                                  onTap: () async {
-                                    // Signing out User
-                                    await FirebaseAuth.instance.signOut();
-
-                                    // Change the status in Shared Preferences
-                                    final prefs = await SharedPreferences.getInstance();
-
-                                    await prefs.setBool("userRegisteredStatus", false);
-
-                                    Navigator.of(context).pushReplacement(_routeToSignInScreen());
-                                  },
+                                  onTap: () => showDialog<String>(
+                                      context: context,
+                                      builder: (BuildContext context) => AlertDialog(
+                                        title: const Text('Logout'),
+                                        content: const Text('Are you sure you want to logout?'),
+                                        actions: <Widget>[
+                                          TextButton(
+                                            onPressed: () => Navigator.pop(context, 'Cancel'),
+                                            child: const Text('No',style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
+                                          ),
+                                          TextButton(
+                                            onPressed: () async {
+                                              // Signing out User
+                                              await FirebaseAuth.instance.signOut();
+                                              // Change the status in Shared Preferences
+                                              final prefs = await SharedPreferences.getInstance();
+                                              await prefs.setBool("userRegisteredStatus", false);
+                                              Navigator.of(context).pushReplacement(_routeToSignInScreen());
+                                            },
+                                            child: const Text('Yes',style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
+                                          ),
+                                        ],
+                                      ),),
                                   child: Padding(
                                     padding: const EdgeInsets.all(20.0),
                                     child: Column(
