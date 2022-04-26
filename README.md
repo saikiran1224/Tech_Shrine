@@ -1,6 +1,6 @@
 # FlutterFire Samples
 
-This repo is created to contain various sample apps demonstrating the integration of **Firebase** with **Flutter**. The final goal is to create something like the [Flutter Gallery](https://github.com/flutter/gallery) app, but for Firebase.
+**Firebase** with **Flutter**. The final goal is to create something like the [Flutter Gallery](https://github.com/flutter/gallery) app, but for Firebase.
 
 Also, the recently changes introduced in **Flutter 2** create some confusion, mostly with the beginners, as many other repositories are not yet updated to the latest version. Even [FlutterFire](https://firebase.flutter.dev/) plugins got a lot of improvements and most of them support null safety now.
 
