@@ -49,7 +49,7 @@ class _ViewTechiesScreenState extends State<ViewTechiesScreen> {
           onPressed: () => Navigator.of(context).pop(),
         ),
         title: AppBarTitle(
-          sectionName: "Meet our Techies in " + widget._nameOfDomain,
+          sectionName: "Techies in " + widget._nameOfDomain,
         ),
       ),
       body: Padding(
@@ -59,7 +59,13 @@ class _ViewTechiesScreenState extends State<ViewTechiesScreen> {
             builder: (context, snapshot) {
               if (snapshot.hasError) {
                 return Text('Something went wrong');
-              } else if (snapshot.hasData || snapshot.data != null) {
+              } else if(!snapshot.hasData) {
+                return Center(
+                  child: Text('Sorry! No Techies found.', style: TextStyle(color: Palette.firebaseAmber, fontSize: 20.0),),
+                );
+
+              }
+              else if(snapshot.hasData || snapshot.data != null) {
                 return ListView.separated(
                   separatorBuilder: (context, index) => SizedBox(height: 16.0),
                   itemCount: snapshot.data!.docs.length,
@@ -78,7 +84,7 @@ class _ViewTechiesScreenState extends State<ViewTechiesScreen> {
                         child: Container(
                             height: 210,
                             decoration: BoxDecoration(
-                               border: Border.all(color: Palette.firebaseYellow, width: 1.5),
+                                border: Border.all(color: Palette.firebaseYellow, width: 1.5),
                                 boxShadow: [
                                   BoxShadow(
                                     color: Colors.grey.withOpacity(.5),
@@ -92,61 +98,61 @@ class _ViewTechiesScreenState extends State<ViewTechiesScreen> {
                                 ],
                                 color: Palette.firebaseNavy,
                                 borderRadius: BorderRadius.circular(10)),
-                          child: Padding(
-                            padding: EdgeInsets.fromLTRB(15, 15, 0,5),
-                            child: Row(
-                             // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                ClipOval(
-                                  child: Material(
-                                    color: Palette.firebaseGrey.withOpacity(0.3),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Icon(
-                                        Icons.person,
-                                        size: 42,
-                                        color: Palette.firebaseGrey,
+                            child: Padding(
+                              padding: EdgeInsets.fromLTRB(15, 15, 0,5),
+                              child: Row(
+                                // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  ClipOval(
+                                    child: Material(
+                                      color: Palette.firebaseGrey.withOpacity(0.3),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Icon(
+                                          Icons.person,
+                                          size: 42,
+                                          color: Palette.firebaseGrey,
+                                        ),
                                       ),
                                     ),
                                   ),
-                                ),
-                                SizedBox(width: 15.0),
-                                Expanded(child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(name,style: TextStyle(fontSize: 18.0, color: Palette.firebaseYellow, letterSpacing: 0.8, fontWeight: FontWeight.bold),),
-                                    SizedBox(height: 3.0,),
-                                    Text("@$jntuNo",style: TextStyle(fontSize: 13.0, color: Palette.firebaseAmber),),
-                                    SizedBox(height: 10.0,),
-                                    Text(shortIntro,style: TextStyle(fontSize: 15.0, overflow: TextOverflow.visible,),maxLines: 3,),
-                                    SizedBox(height: 10.0,),
-                                    Row(
-                                      children: [
-                                        ElevatedButton.icon(
+                                  SizedBox(width: 15.0),
+                                  Expanded(child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(name,style: TextStyle(fontSize: 18.0, color: Palette.firebaseYellow, letterSpacing: 0.8, fontWeight: FontWeight.bold),),
+                                      SizedBox(height: 3.0,),
+                                      Text("@$jntuNo",style: TextStyle(fontSize: 13.0, color: Palette.firebaseAmber),),
+                                      SizedBox(height: 10.0,),
+                                      Text(shortIntro,style: TextStyle(fontSize: 15.0, overflow: TextOverflow.visible,),maxLines: 3,),
+                                      SizedBox(height: 10.0,),
+                                      Row(
+                                        children: [
+                                          ElevatedButton.icon(
                                             onPressed: () => launch("tel://+91$phoneNumber"),
                                             icon: Icon(Icons.call),
                                             label: Text('Call'),
                                             style: ElevatedButton.styleFrom(
                                                 primary: Palette.firebaseAmber //elevated Button background color
                                             ),),
-                                        SizedBox(width: 10.0,),
-                                        ElevatedButton.icon(
-                                          onPressed: () => launch("mailto:$emailID?subject=[Tech Shrine] Request for Tech Support&body=Hi Techie ,\n\nHappy to meet you!. I am very much eager to learn and develop projects in ${widget._nameOfDomain}. Could you please help me out in learning this domain in your free time. \n\nThanks in Advance."),
-                                          icon: Icon(Icons.mail),
-                                          label: Text('Mail'),
-                                          style: ElevatedButton.styleFrom(
-                                              primary: Palette.firebaseOrange //elevated Button background color
-                                          ),),
-                                      ],
-                                    )
+                                          SizedBox(width: 10.0,),
+                                          ElevatedButton.icon(
+                                            onPressed: () => launch("mailto:$emailID?subject=[Tech Shrine] Request for Tech Support&body=Hi Techie ,\n\nHappy to meet you!. I am very much eager to learn and develop projects in ${widget._nameOfDomain}. Could you please help me out in learning this domain in your free time. \n\nThanks in Advance."),
+                                            icon: Icon(Icons.mail),
+                                            label: Text('Mail'),
+                                            style: ElevatedButton.styleFrom(
+                                                primary: Palette.firebaseOrange //elevated Button background color
+                                            ),),
+                                        ],
+                                      )
 
-                                  ],
-                                ))
-                              ],
-                            ),
-                          )));
+                                    ],
+                                  ))
+                                ],
+                              ),
+                            )));
                   },
                 );
               }

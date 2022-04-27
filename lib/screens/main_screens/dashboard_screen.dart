@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterfire_samples/res/custom_colors.dart';
 import 'package:flutterfire_samples/screens/authentication/sign_in_screen.dart';
+import 'package:flutterfire_samples/screens/main_screens/calendar_screen.dart';
 import 'package:flutterfire_samples/screens/main_screens/circulars_screen.dart';
 import 'package:flutterfire_samples/screens/main_screens/connect_screen.dart';
 import 'package:flutterfire_samples/screens/main_screens/pdfviewer_screen.dart';
@@ -31,8 +32,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
         var end = Offset.zero;
         var curve = Curves.ease;
 
-        var tween =
-        Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+        var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
 
         return SlideTransition(
           position: animation.drive(tween),
@@ -41,7 +41,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
       },
     );
   }
-
 
 
   @override
@@ -177,8 +176,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                             child:Center(
                                 child: InkWell(
                                   onTap: () {
-                                    Navigator.push(context,MaterialPageRoute(builder: (context) =>
-                                        PDFViewerScreen(fileName: "Academic Calendar",url: "http://www.gmrit.org/B.Tech%207th%20&%208th%20Semester%20Academic%20Calendar%202021-22.pdf")));
+                                    Navigator.push(context,MaterialPageRoute(builder: (context) => CalendarScreen()));
                                   },
                                   child: Padding(
                                     padding: const EdgeInsets.all(20.0),
