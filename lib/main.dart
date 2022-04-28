@@ -31,8 +31,8 @@ class MyApp extends StatelessWidget {
       title: 'FlutterFire Samples',
       debugShowCheckedModeBanner: false,
       useInheritedMediaQuery: true,
-     // locale: DevicePreview.locale(context),
-     // builder: DevicePreview.appBuilder,
+    // locale: DevicePreview.locale(context), // Comment this
+     //builder: DevicePreview.appBuilder, // Comment this
       theme: ThemeData(
         primarySwatch: Colors.indigo,
         brightness: Brightness.dark,

@@ -80,7 +80,7 @@ class _CircularsScreenState extends State<CircularsScreen> {
                                   child: ListTile(
                                     leading: Image.asset("assets/images/pdf_image.png", width: 60.0,),
                                     dense: false,
-                                    textColor: Colors.green,
+                                    textColor: Colors.white,
                                     title: Text(ref.name.toString()),
                                     onTap: () async {
                                       String downloadUrl = "";
